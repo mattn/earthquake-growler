@@ -7,6 +7,8 @@ use XML::Feed::Deduper;
 use Growl::Any;
 use File::Temp qw/ tempfile /;
 
+our $VERSION = "0.01";
+
 my $uri = 'http://tenki.jp/component/static_api/rss/earthquake/recent_entries_by_day.xml';
 
 my $growl = Growl::Any->new( appname => '地震速報', events => ['地震'] );
