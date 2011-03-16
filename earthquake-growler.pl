@@ -7,7 +7,7 @@ use utf8;
 use XML::Feed;
 use XML::Feed::Deduper;
 use Growl::Any;
-use File::Spec;
+use File::Temp qw/ tempdir /;
 
 our $VERSION = "0.01";
 
@@ -15,8 +15,8 @@ my $uri = 'http://tenki.jp/component/static_api/rss/earthquake/recent_entries_by
 
 my @events;
 push @events, "震度$_" for 1 .. 10;
-my $growl   = Growl::Any->new( appname => '地震速報', events => [@events] );
-my $dir     = File::Spec->tmpdir();
+my $growl = Growl::Any->new( appname => '地震速報', events => [@events] );
+my $dir = tempdir( CLEANUP => 1 );
 my $deduper = XML::Feed::Deduper->new( path => "$dir/earthquake-growler.db" );
 
 while (1) {
