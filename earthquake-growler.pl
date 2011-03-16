@@ -1,6 +1,8 @@
 #!perl
 use strict;
 use warnings;
+use 5.008001;
+
 use utf8;
 use XML::Feed;
 use XML::Feed::Deduper;
@@ -29,3 +31,19 @@ while (1) {
     }
     sleep 30;
 }
+
+__END__
+
+=head1 NAME
+
+earthquake-growler
+
+=head1 AUTHOR
+
+Yasuhiro Matsumoto
+
+=head1 LICENSE
+
+This program is licensed under the same terms as Perl itself.
+
+=cut
