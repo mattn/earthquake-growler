@@ -20,7 +20,7 @@ my $deduper = XML::Feed::Deduper->new( path => $temp );
 
 while (1) {
     my $feed = XML::Feed->parse( URI->new($uri) )
-      or die $growl->notify( 'Error', 'fetch feed', XML::Feed->errstr );
+      or $growl->notify( 'Error', 'fetch feed', XML::Feed->errstr );
     if ($feed) {
         for my $entry ( $deduper->dedup( $feed->entries ) ) {
             my $title       = $entry->title;
