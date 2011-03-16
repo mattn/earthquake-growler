@@ -7,6 +7,6 @@ install_script "earthquake-growler.pl";
 requires 'XML::Feed';
 requires 'XML::Feed::Deduper';
 requires 'Growl::Any';
-requires 'File::Temp';
+requires 'File::Spec';
 
 WriteAll;

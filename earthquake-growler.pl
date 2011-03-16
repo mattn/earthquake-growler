@@ -13,8 +13,10 @@ our $VERSION = "0.01";
 
 my $uri = 'http://tenki.jp/component/static_api/rss/earthquake/recent_entries_by_day.xml';
 
-my $growl = Growl::Any->new( appname => '地震速報', events => ['地震'] );
-my $dir = File::Spec->tmpdir();
+my @events;
+push @events, "震度$_" for 1 .. 10;
+my $growl   = Growl::Any->new( appname => '地震速報', events => [@events] );
+my $dir     = File::Spec->tmpdir();
 my $deduper = XML::Feed::Deduper->new( path => "$dir/earthquake-growler.db" );
 
 while (1) {
@@ -23,9 +25,10 @@ while (1) {
     if ($feed) {
         for my $entry ( $deduper->dedup( $feed->entries ) ) {
             my $title       = $entry->title;
+            my $level       = $1 if $entry->title =~ /最大震度 (\d+)/;
             my $description = $entry->content->body;
             $description =~ s/<[^>]*>//sg;
-            $growl->notify( '地震', $title, $description );
+            $growl->notify( "震度$level", $title, $description );
         }
     }
     sleep 30;
