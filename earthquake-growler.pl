@@ -9,7 +9,7 @@ use XML::Feed::Deduper;
 use Growl::Any;
 use File::Temp qw/ tempdir /;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 my $uri = 'http://tenki.jp/component/static_api/rss/earthquake/recent_entries_by_day.xml';
 
